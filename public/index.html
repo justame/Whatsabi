@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whatsabi</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+    <nav>
+        <ul class="verticalActionsBar">
+            <li class="whitePanel button">
+                <svg class="icon"></svg>
+            </li>
+            <li class="whitePanel button">
+                <svg class="icon"></svg>
+            </li>
+            <li class="popover whitePanel">
+                <h2>Filter by data:</h2>
+                <label for="dateFrom">From:</label>
+                <input id="dateFrom" type="date">
+                <label for="dateTo">To:</label>
+                <input id="dateTo" type="date">
+                <button class="button regularButton">Filter report</button>
+            </li>
+            <li class="whitePanel button">
+                <svg class="icon"></svg>
+            </li>
+            <li class="whitePanel button">
+                <svg class="icon"></svg>
+            </li>
+            <li class="popover whitePanel">
+                <h2>Saved reports:</h2>
+                <ul>
+                    <li class="listElementPanel whitePanel">
+                        <h3>Report 1</h3>
+                        <p>Created at 12 April 2015</p>
+                    </li>
+                    <li class="listElementPanel whitePanel">
+                        <h3>Report 1</h3>
+                        <p>Created at 12 April 2015</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="mainWrapper">
+        <aside id="summaryChart">
+            <div>
+                <h2>Total messages:</h2>
+                <div id="totalMessages">0</div>
+                <div id="dailyAverageTraffic">0</div>
+            </div>
+            <div>
+                <div id="topAuthorsChart"></div>
+            </div>
+            <div>
+                <h2>Highest traffic:</h2>
+                <div id="highestTraffic">0</div>
+                <div id="highestTrafficDay"></div>
+            </div>
+            <div>
+                <h2>Zero messages days:</h2>
+                <div id="dayWithoutTraffic">0</div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart">
+                    yess
+                </div>
+            </div>
+        </aside>
+        <div id="mainChart">
+            <div>
+                <h2>Total messages:</h2>
+                <div id="totalMessages">0</div>
+                <div id="dailyAverageTraffic">0</div>
+            </div>
+            <div>
+                <div id="topAuthorsChart"></div>
+            </div>
+            <div>
+                <h2>Highest traffic:</h2>
+                <div id="highestTraffic">0</div>
+                <div id="highestTrafficDay"></div>
+            </div>
+            <div>
+                <h2>Zero messages days:</h2>
+                <div id="dayWithoutTraffic">0</div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div><div>
+            <h2>Total messages:</h2>
+            <div id="totalMessages">0</div>
+            <div id="dailyAverageTraffic">0</div>
+        </div>
+            <div>
+                <div id="topAuthorsChart"></div>
+            </div>
+            <div>
+                <h2>Highest traffic:</h2>
+                <div id="highestTraffic">0</div>
+                <div id="highestTrafficDay"></div>
+            </div>
+            <div>
+                <h2>Zero messages days:</h2>
+                <div id="dayWithoutTraffic">0</div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div><div>
+            <h2>Total messages:</h2>
+            <div id="totalMessages">0</div>
+            <div id="dailyAverageTraffic">0</div>
+        </div>
+            <div>
+                <div id="topAuthorsChart"></div>
+            </div>
+            <div>
+                <h2>Highest traffic:</h2>
+                <div id="highestTraffic">0</div>
+                <div id="highestTrafficDay"></div>
+            </div>
+            <div>
+                <h2>Zero messages days:</h2>
+                <div id="dayWithoutTraffic">0</div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div><div>
+            <h2>Total messages:</h2>
+            <div id="totalMessages">0</div>
+            <div id="dailyAverageTraffic">0</div>
+        </div>
+            <div>
+                <div id="topAuthorsChart"></div>
+            </div>
+            <div>
+                <h2>Highest traffic:</h2>
+                <div id="highestTraffic">0</div>
+                <div id="highestTrafficDay"></div>
+            </div>
+            <div>
+                <h2>Zero messages days:</h2>
+                <div id="dayWithoutTraffic">0</div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+            <div>
+                <div>
+                    <h2>%weekend:</h2>
+                    <div id="weekEndTraffic"></div>
+                </div>
+                <div>
+                    <h2>%weekday:</h2>
+                    <div id="weekDayTraffic"></div>
+                </div>
+            </div>
+            <div>
+                <div id="weeklyChart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="rightSlide" class="verticalPanel">
+        <nav>
+            <ul class="verticalActionsBar">
+                <li id="authorsPanelTrigger" class="whitePanel button">
+                    <svg class="icon profileIcon"></svg>
+                </li>
+                <li id="chatPanelTrigger" class="whitePanel button">
+
+                </li>
+            </ul>
+        </nav>
+        <div id="chatPanel" class="verticalPanel whitePanel">
+            <header>
+                <h2>Chat</h2>
+                <p>1259 messages.</p>
+                <button id="showKeywordsPanel" class="button regularButton secondaryButton">Keywords</button>
+            </header>
+            <ul id="keywordsPanel" class="auxPanel">
+                <li>
+                    <div class="keywordPanel listElementPanel">
+                        <h3>Keyword 1</h3>
+                        <p>1234 ocurrences</p>
+                        <button class="button regularButton tertiaryButton">Hide</button>
+                        <button class="button regularButton">show</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="keywordPanel listElementPanel">
+                        <h3>Keyword 1</h3>
+                        <p>1234 ocurrences</p>
+                        <button class="button regularButton tertiaryButton">Hide</button>
+                        <button class="button regularButton">show</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="keywordPanel listElementPanel">
+                        <h3>Keyword 1</h3>
+                        <p>1234 ocurrences</p>
+                        <button class="button regularButton tertiaryButton">Hide</button>
+                        <button class="button regularButton">show</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="keywordPanel listElementPanel">
+                        <h3>Keyword 1</h3>
+                        <p>1234 ocurrences</p>
+                        <button class="button regularButton tertiaryButton">Hide</button>
+                        <button class="button regularButton">show</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="keywordPanel listElementPanel">
+                        <h3>Keyword 1</h3>
+                        <p>1234 ocurrences</p>
+                        <button class="button regularButton tertiaryButton">Hide</button>
+                        <button class="button regularButton">show</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="keywordPanel listElementPanel">
+                        <h3>Keyword 1</h3>
+                        <p>1234 ocurrences</p>
+                        <button class="button regularButton tertiaryButton">Hide</button>
+                        <button class="button regularButton">show</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="keywordPanel listElementPanel excludedKeyword">
+                        <h3>Keyword 1</h3>
+                        <p>1234 ocurrences</p>
+                        <button class="button regularButton tertiaryButton">Hide</button>
+                        <button class="button regularButton">show</button>
+                    </div>
+                </li>
+            </ul>
+            <ul id="chatMessages" class="mainList">
+                <li>
+                    <ul>
+                        <li class="dateSticker">
+                            12 April 2015
+                        </li>
+                        <li id="begSession1" class="message whitePanel beginningMessage">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel ownMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li id="begSession2" class="message whitePanel ownMessage beginningMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel ownMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li class="dateSticker">
+                            17 April 2015
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel ownMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel ownMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel ownMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li id="begSession3" class="message whitePanel ownMessage beginningMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel ownMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel ownMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel ownMessage">
+                            <h4>Author name1 asasiasfia ausdiuaisdi uaisd uiausdiu isud ads </h4>
+                            <div>Lorem ipsum ahdaksf asldkjalsk jlakkjsdl hkjah kjhak gkj hkjh khk jhkj hkj hk hkjj hk jhkj hkjhjk hkjjhk   </div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                        <li class="message whitePanel">
+                            <h4>Author name1</h4>
+                            <div>Hello world!</div>
+                            <span class="messageDateDetail">15:50</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="authorsPanel" class="verticalPanel whitePanel">
+            <header>
+                <h2>Authors</h2>
+                <p>5 authors.</p>
+                <button  id="showAuthorsComparePanel" class="button regularButton">Compare</button>
+            </header>
+            <div id="authorsComparePanel" class="auxPanel">
+
+            </div>
+            <ul class="mainList">
+                <li>
+                    <div class="listElementPanel authorPanel">
+                        <svg class="authorProfilePic"></svg>
+                        <h3>Author namenjnj jkasdk asuhto nasmmsfasfka lskflk alkslfk lasf </h3>
+                        <p>12345 messages. 12489 files. 1245h spent.</p>
+                    </div>
+                    <div class="authorPanelDetails">
+                        <p>Iniciadas: 5</p>
+                        <p>Finalizadas: 2</p>
+                        <p>Monologos: 10</p>
+                        <p>Poca interacción con Author3</p>
+                        <p>Main followers:</p>
+                        <ul>
+                            <li>Authro1</li>
+                            <li>Authro2</li>
+                            <li>Authro3</li>
+                        </ul>
+                        <p>Main following:</p>
+                        <ul>
+                            <li>Authro1</li>
+                            <li>Authro2</li>
+                            <li>Authro3</li>
+                        </ul>
+                        <p>Keyword:</p>
+                        <ul>
+                            <li>Keywrod1</li>
+                            <li>Keyword2</li>
+                            <li>Keyword3</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="listElementPanel authorPanel">
+                        <svg class="authorProfilePic"></svg>
+                        <h3>Author name</h3>
+                        <p>12345 messages. 12489 files. 1245h spent.</p>
+                    </div>
+                    <div class="authorPanelDetails">
+                        <p>Iniciadas: 5</p>
+                        <p>Finalizadas: 2</p>
+                        <p>Monologos: 10</p>
+                        <p>Poca interacción con Author3</p>
+                        <p>Main followers:</p>
+                        <ul>
+                            <li>Authro1</li>
+                            <li>Authro2</li>
+                            <li>Authro3</li>
+                        </ul>
+                        <p>Main following:</p>
+                        <ul>
+                            <li>Authro1</li>
+                            <li>Authro2</li>
+                            <li>Authro3</li>
+                        </ul>
+                        <p>Keyword:</p>
+                        <ul>
+                            <li>Keywrod1</li>
+                            <li>Keyword2</li>
+                            <li>Keyword3</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="listElementPanel authorPanel">
+                        <svg class="authorProfilePic"></svg>
+                        <h3>Author namenjnj jkasdk asuhto nasmmsfasfka lskflk alkslfk lasf </h3>
+                        <p>12345 messages. 12489 files. 1245h spent.</p>
+                    </div>
+                    <div class="authorPanelDetails">
+                        <p>Iniciadas: 5</p>
+                        <p>Finalizadas: 2</p>
+                        <p>Monologos: 10</p>
+                        <p>Poca interacción con Author3</p>
+                        <p>Main followers:</p>
+                        <ul>
+                            <li>Authro1</li>
+                            <li>Authro2</li>
+                            <li>Authro3</li>
+                        </ul>
+                        <p>Main following:</p>
+                        <ul>
+                            <li>Authro1</li>
+                            <li>Authro2</li>
+                            <li>Authro3</li>
+                        </ul>
+                        <p>Keyword:</p>
+                        <ul>
+                            <li>Keywrod1</li>
+                            <li>Keyword2</li>
+                            <li>Keyword3</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="listElementPanel authorPanel">
+                        <svg class="authorProfilePic"></svg>
+                        <h3>Author name</h3>
+                        <p>12345 messages. 12489 files. 1245h spent.</p>
+                    </div>
+                    <div class="authorPanelDetails">
+                        <p>Iniciadas: 5</p>
+                        <p>Finalizadas: 2</p>
+                        <p>Monologos: 10</p>
+                        <p>Poca interacción con Author3</p>
+                        <p>Main followers:</p>
+                        <ul>
+                            <li>Authro1</li>
+                            <li>Authro2</li>
+                            <li>Authro3</li>
+                        </ul>
+                        <p>Main following:</p>
+                        <ul>
+                            <li>Authro1</li>
+                            <li>Authro2</li>
+                            <li>Authro3</li>
+                        </ul>
+                        <p>Keyword:</p>
+                        <ul>
+                            <li>Keywrod1</li>
+                            <li>Keyword2</li>
+                            <li>Keyword3</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="assets/libs/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="assets/libs/snap.svg-min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+
+</body>
+</html>
