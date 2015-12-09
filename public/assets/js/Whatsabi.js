@@ -11,14 +11,15 @@ var Whatsabi = function () {
         //Different regular expressions we will use later
         var linePattern = "\\r\\n|\\r|\\n",
             authorPattern = "[-]\\s.[^:]*[:]\\s",//Match: "- Author name : "
-            datePattern1 = "\\w{1,2}\\s\\w{3}",//Match: "de Abr"
-            datePattern2 = "\\d{1,2}\\s" + datePattern1,//Match: "12 de Abr"
-            datePattern3 = "\\d{1,2}[/]){2}\\d{4}",//Match: "01/12/2014"
-            timePattern1 = "\\d{1,2}[:]\\d{2}\\s?[A-Z]{0,2}",//Match: "12:59PM"
-        //TODO: Support French characters
-            dataHourPattern1 = "((((" + datePattern2 + ")|(" + datePattern3 + "))[,]\\s" + timePattern1 + ")",
-            dataHourPattern2 = "(" + timePattern1 + "\\s" + datePattern2 + "(" + datePattern1 + ")?)",
-            messageDataPattern =   "^(" + dataHourPattern1 + "|" + dataHourPattern2 + ")\\s",
+            datePattern1 = "\\d{1,2}\\s\\w{1,2}\\s\\w{3}",//Match: "12 de Abr"
+            datePattern2 = "\\d{1,2}[\/]\\d{2}[\/]\\d{4}",//Match: "01/12/2014"
+            hourPattern = "\\d{1,2}[:]\\d{2}\\s?[A-Z]{0,2}",//Match: "12:59PM"
+            //Match: "26/10/2015, 10:34 AM" | "26/10/2015, 10:34" | "5 de Abr, 2:42AM" | "5 de Abr, 2:42"
+            dataHourPattern = "((" + datePattern1 + ")|(" + datePattern2 + "))[,]\\s" + hourPattern,
+            //Match: "26/10/2015, 10:34 AM " | "26/10/2015, 10:34 " | "5 de Abr, 2:42AM " | "5 de Abr, 2:42 "
+            messageDataPattern =   "^" + dataHourPattern + "\\s",
+            //Match: "26/10/2015, 10:34 AM - Author name : " | "26/10/2015, 10:34 - Author name : " |
+            // "5 de Abr, 2:42AM - Author name : " | "5 de Abr, 2:42 - Author name : "
             messagePattern =    messageDataPattern + authorPattern;
 
         /**
@@ -29,15 +30,16 @@ var Whatsabi = function () {
          */
         function splitText(text){
             var data = [],
-            //Firstly we split the text in lines
+                //Firstly we split the text in lines
                 lines = text.split(new RegExp(linePattern));
 
             //Iterating each line to check if it is a user or a system message
             //We discard messages from the system
             for (var i = 0; i < lines.length; i++) {
-                var current = lines[i];
+                var current = lines[i],
+                    messageRegExp = new RegExp(messagePattern);
 
-                if ((new RegExp(messagePattern)).test(current)) {
+                if (messageRegExp.test(current)) {
                     //If the current line follows the correct message pattern,
                     //we include it to the array of data
                     data.push(current);
@@ -56,13 +58,69 @@ var Whatsabi = function () {
         }
 
         /**
+         * This method return the number of the month in the string.
+         * January = 0, February = 1 ...
+         * @param string
+         * @returns {*}
+         */
+        function getMonthNumber(string){
+            //This function support only EN,SP and PT languages
+            var months = {Ene:0,Jan:0,Feb:1,Fev:1,Mar:2,Abr:3,Apr:3,May:4,Mai:4,Jun:5,
+                Jul:6,Ago:7,Aug:7,Sep:8,Set:8,Oct:9,Out:9,Nov:10,Dec:11,Dez:11};
+
+            return months[string];
+        }
+
+        /**
          * This method return an Date object based in the string received as argument.
          * @param string
          * @returns {Date}
          */
         function formatDate(string){
+            //We create a date that will be edited with the data of the message
+            var date = new Date(),
+                d, y, m, t, h, min, temp;
 
-            return new Date();
+            //Getting year, month and day from the data of message
+            //Format: "12 de Abr"
+            if((new RegExp("^" + datePattern1)).test(string)){
+                temp = string.match(datePattern1)[0];
+                y = date.getFullYear();
+                m = getMonthNumber(temp.match(/[A-Z][a-z]{2}/)[0]);
+                d = temp.match(/\d{1,2}/)[0];
+
+            //Format: "01/12/2014"
+            } else if ((new RegExp("^" + datePattern2)).test(string)) {
+                temp = string.match(datePattern2)[0].split("/");
+                y = temp[2];
+                m = temp[1] - 1;
+                d = temp[0];
+            }else{
+                //No matching format. Console the format
+                console.log("Error: Data format invalid \"" + string + "\"");
+
+                //We will return the current date if there isn't a match
+                return date;
+            }
+
+            //Getting hour and minutes from the data of the message
+            t = string.match(new RegExp(hourPattern))[0];
+            temp = t.match(/\d{1,2}/g);
+            h = temp[0];
+            min = temp[1];
+
+            if(t.substring(t.length - 2) == "PM"){
+                h = parseInt(h)%12+12;
+            }
+
+            //Set the date
+            date.setFullYear(y);
+            date.setMonth(m);
+            date.setDate(d);
+            date.setHours(h);
+            date.setMinutes(min);
+
+            return date;
         }
 
         /**
@@ -87,6 +145,7 @@ var Whatsabi = function () {
 
                 //Split date and author from the message data
                 aux = messageData.split(" - ");
+
                 date = formatDate(aux[0]);
                 author = aux[1].slice(0,-2);
 
@@ -100,8 +159,6 @@ var Whatsabi = function () {
                         content : content
                     };
 
-                    console.log(line);
-
                     messages.push(protoMessage);
                 }else{
                     console.log("Something was wrong formatting the message:");
@@ -111,7 +168,6 @@ var Whatsabi = function () {
                     console.log("Content: " + content);
                 }
             }
-
             return messages;
         }
 
