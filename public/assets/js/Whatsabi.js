@@ -8,8 +8,10 @@ var Whatsabi = function () {
     var instance;
 
     function init(){
-        //Different regular expressions we will use later
-        var linePattern = "\\r\\n|\\r|\\n",
+
+        var conversation,
+            //Different regular expressions we will use later
+            linePattern = "\\r\\n|\\r|\\n",
             authorPattern = "[-]\\s.[^:]*[:]\\s",//Match: "- Author name : "
             datePattern1 = "\\d{1,2}\\s\\w{1,2}\\s\\w{3}",//Match: "12 de Abr"
             datePattern2 = "\\d{1,2}[\/]\\d{2}[\/]\\d{4}",//Match: "01/12/2014"
@@ -86,7 +88,7 @@ var Whatsabi = function () {
             if((new RegExp("^" + datePattern1)).test(string)){
                 temp = string.match(datePattern1)[0];
                 y = date.getFullYear();
-                m = getMonthNumber(temp.match(/[A-Z][a-z]{2}/)[0]);
+                m = getMonthNumber(temp.match(/[A-z|\u00E0-\u00FC]{3}/)[0]);
                 d = temp.match(/\d{1,2}/)[0];
 
             //Format: "01/12/2014"
@@ -129,7 +131,7 @@ var Whatsabi = function () {
          * @param lines
          * @returns {Array}
          */
-        function formatLines(lines){
+        function formatMessage(lines){
             var messages = [],
                 messageData, date, author, content, aux;
 
@@ -152,14 +154,10 @@ var Whatsabi = function () {
                 //Before add the formatted text to the array, we confirm everything is ok
                 //and log the data in he console if something was wrong
                 if(date instanceof Date && author.length > 0 && typeof content == "string"){
-                    //Create the an object with the data and push it to the messages array
-                    var protoMessage = {
-                        date : date,
-                        user : author,
-                        content : content
-                    };
+                    //Create the a message object with the data and push it to the messages array
+                    var message = new Message(date, author, content);
 
-                    messages.push(protoMessage);
+                    messages.push(message);
                 }else{
                     console.log("Something was wrong formatting the message:");
                     console.log(line);
@@ -168,6 +166,7 @@ var Whatsabi = function () {
                     console.log("Content: " + content);
                 }
             }
+
             return messages;
         }
 
@@ -177,11 +176,17 @@ var Whatsabi = function () {
         function analyzeText(text){
             var data;
 
+            //Init conversation variable with a new Conversation instance
+            conversation = new Conversation('#chatMessages');
+
             if(typeof text == "string"){
-                data = formatLines(splitText(text));
+                data = formatMessage(splitText(text));
+
+                for(var i = 0; i < data.length; i++){
+                    conversation.addMessage(data[i]);
+                }
             }
 
-            return data;
         }
 
         //Return the instance of Whatsabi
