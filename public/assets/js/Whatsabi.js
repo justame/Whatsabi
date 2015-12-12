@@ -218,6 +218,34 @@ var Whatsabi = function () {
                 } else {
                     console.log('File format incorrect.');
                 }
+            },
+
+            /**
+             * This method restart the app to create a new report.
+             */
+            restart: function (){
+                console.log("New analysis");
+            },
+
+            /**
+             * This method sent the conversation to the server for future usage.
+             */
+            saveConversation: function (){
+                console.log("Saving conversation...")
+            },
+
+            /**
+             * This method print the report of a conversation
+             */
+            printConversation: function () {
+                console.log("Printing converstaion...")
+            },
+
+            /**
+             * This method filter the data showed in the report.
+             */
+            filterReport: function () {
+                console.log("Filtering report");
             }
         }
     }
@@ -235,3 +263,5 @@ var Whatsabi = function () {
 
 var app = Whatsabi.getInstance();
 $('#fileInput').on('change', app.readFile);
+$('#restartAppButton').on('click', app.restart);
+$('#saveConversationButton').on('click', app.saveConversation);
