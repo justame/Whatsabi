@@ -9,7 +9,9 @@ var Whatsabi = function () {
 
     function init(){
 
-        var conversation,
+        var //Init conversation variable with a new Conversation instance
+            conversation = new Conversation('#chatMessages'),
+            keywordAnalyzer  = new KeywordAnalyzer('#keywordsPanel'),
             //Different regular expressions we will use later
             linePattern = "\\r\\n|\\r|\\n",
             authorPattern = "[-]\\s.[^:]*[:]\\s",//Match: "- Author name : "
@@ -19,10 +21,10 @@ var Whatsabi = function () {
             //Match: "26/10/2015, 10:34 AM" | "26/10/2015, 10:34" | "5 de Abr, 2:42AM" | "5 de Abr, 2:42"
             dataHourPattern = "((" + datePattern1 + ")|(" + datePattern2 + "))[,]\\s" + hourPattern,
             //Match: "26/10/2015, 10:34 AM " | "26/10/2015, 10:34 " | "5 de Abr, 2:42AM " | "5 de Abr, 2:42 "
-            messageDataPattern =   "^" + dataHourPattern + "\\s",
+            messageDataPattern = "^" + dataHourPattern + "\\s",
             //Match: "26/10/2015, 10:34 AM - Author name : " | "26/10/2015, 10:34 - Author name : " |
             // "5 de Abr, 2:42AM - Author name : " | "5 de Abr, 2:42 - Author name : "
-            messagePattern =    messageDataPattern + authorPattern;
+            messagePattern = messageDataPattern + authorPattern;
 
         /**
          * This method take a text and search for Whatsapp message patterns, then it returns an array of strings.
@@ -52,7 +54,7 @@ var Whatsabi = function () {
                     //a piece of content to concatenate with previous line. We must also prevent concatenate
                     //with element out of range of array.
 
-                    data[data.length - 2] += current;
+                    data[data.length - 1] += current;
                 }
             }
 
@@ -176,17 +178,20 @@ var Whatsabi = function () {
         function analyzeText(text){
             var data;
 
-            //Init conversation variable with a new Conversation instance
-            conversation = new Conversation('#chatMessages');
-
             if(typeof text == "string"){
                 data = formatMessage(splitText(text));
 
+                //Manage each message..
                 for(var i = 0; i < data.length; i++){
-                    conversation.addMessage(data[i]);
+                    var currentMessage = data[i];
+
+                    conversation.addMessage(currentMessage);
+                    keywordAnalyzer.addText(currentMessage.getContent())
                 }
             }
 
+            keywordAnalyzer.print();
+            conversation.print();
         }
 
         //Return the instance of Whatsabi
