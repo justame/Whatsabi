@@ -262,6 +262,13 @@ var Whatsabi = function () {
 
 
 var app = Whatsabi.getInstance();
-$('#fileInput').on('change', app.readFile);
-$('#restartAppButton').on('click', app.restart);
+$('#fileInputButtonHidden').on('change', app.readFile);
+$('#fileInputButton').click(function () {
+    $('#fileInputButtonHidden').click();
+});
+$('#filterReportButton').on('click', app.filterReport);
 $('#saveConversationButton').on('click', app.saveConversation);
+$('#showNewConversationPopup').on('click', function () {
+    $(this).toggleClass('overAll');
+    $('#lightBox').fadeToggle();
+});

@@ -32,6 +32,15 @@ $('*[class^="dotSession"]')
         $(dotClass).toggleClass('dotActive');
     });
 
+
+//Popover trigger
+$('.popover').prev('.button').on('click', function () {
+    $(this).next('.popover').fadeToggle();
+});
+
+
+
+
 //Sliding panels
 $('*[id$="Trigger"]').on('click', function () {
     var $this = $(this),
@@ -69,14 +78,13 @@ function paintingProfiles(){
         paintProfileIcon(pics[i], colors[i%8])
     }
 }
-function paintProfileIcon(container, color){
-    var canvas = Snap(container),
-        container = $(container),
+function paintProfileIcon(eContainer, color){
+    var canvas = Snap(eContainer),
+        container = $(eContainer),
         bodyColor = color,
         backgroundColor = container.css('background-color'),
         w = container.css('width'),//container width
         b;//border of head
-
 
     w = eval(w.substring(0, w.length - 2));
     b = w/16;
@@ -94,5 +102,4 @@ function paintProfileIcon(container, color){
     });
 }
 
-paintProfileIcon('.profileIcon', '#78E7BC');
 paintingProfiles();

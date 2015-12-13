@@ -9,15 +9,33 @@
 
 </head>
 <body>
-
-    <input id="fileInput" type="file" />
+    <div id="lightBox">
+        <div class="whitePanel popup">
+                <h1>
+                    Whatsabi
+                </h1>
+                <p>
+                    Let's get some cool metrics from your Whatsapp conversation. Whatsabi lets you know more about your Whatsapp usage.
+                </p>
+                <p>
+                    Project inspired by <a class="redLink" href="http://feltron.com/" target="_blank">Nicholas Felton's work</a>.
+                </p>
+                <div>
+                    <button id="showEmailButton" class="button regularButton">Send me an email</button>
+                    <input id="fileInputButtonHidden" type="file" name="file" value="Give me a file">
+                    <button id="fileInputButton" class="button regularButton">Give me a file</button>
+                </div>
+                <span id="progressMessage"></span>
+                <svg id="progressBar"></svg>
+        </div>
+    </div>
 
     <nav>
-        <ul class="verticalActionsBar">
-            <li id="restartAppButton" class="whitePanel button">
+        <ul class="verticalNavBar">
+            <li id="showNewConversationPopup" class="whitePanel button circleButton">
                 <svg class="icon"></svg>
             </li>
-            <li class="whitePanel button">
+            <li class="whitePanel button circleButton">
                 <svg class="icon"></svg>
             </li>
             <li class="popover whitePanel">
@@ -26,12 +44,12 @@
                 <input id="dateFrom" type="date">
                 <label for="dateTo">To:</label>
                 <input id="dateTo" type="date">
-                <button class="button regularButton">Filter report</button>
+                <button id="filterReportButton" class="button regularButton">Filter report</button>
             </li>
-            <li id="saveConversationButton" class="whitePanel button">
+            <li id="saveConversationButton" class="whitePanel button circleButton">
                 <svg class="icon"></svg>
             </li>
-            <li class="whitePanel button">
+            <li class="whitePanel button circleButton">
                 <svg class="icon"></svg>
             </li>
             <li class="popover whitePanel">
@@ -754,11 +772,11 @@
 
     <div id="rightSlide" class="verticalPanel">
         <nav>
-            <ul class="verticalActionsBar">
-                <li id="authorsPanelTrigger" class="whitePanel button">
-                    <svg class="icon profileIcon"></svg>
+            <ul class="verticalNavBar">
+                <li id="authorsPanelTrigger" class="whitePanel button circleButton">
+
                 </li>
-                <li id="chatPanelTrigger" class="whitePanel button">
+                <li id="chatPanelTrigger" class="whitePanel button circleButton">
 
                 </li>
             </ul>

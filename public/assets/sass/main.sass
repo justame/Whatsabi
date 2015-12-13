@@ -18,6 +18,10 @@
   transform: translateY(-75%)
   position: absolute
 
+@mixin horizontalCenter()
+  margin-left: auto
+  margin-right: auto
+
 html, body
   height: 100%
 
@@ -26,11 +30,14 @@ body
   *
     box-sizing: border-box
     overflow: hidden
+    overflow: inherit
+    text-align: inherit
 
 nav
   width: 60px
   height: inherit
   position: absolute
+  overflow: visible
   top: 0
 
 #mainWrapper
@@ -111,12 +118,13 @@ nav
 //             MAIN STYLE
 ////////////////////////////////////////
 //COLOR PALETTE
-$secondaryColor:red
-$mainColor:LawnGreen
+$mainColor:#54f582
+$secondaryColor:#FF4242
 $stickerColor:lighten(blue,35)
-$backgroundColor:#EEE
+$backgroundColor:#F0F2EB
 $bordersShadowColor:#DDD
 $textColor:#BBB
+$backgroundColorTransparent:rgba(240,242,235,0.95)
 
 //STYLE MIXIN
 @mixin round($radius)
@@ -177,16 +185,17 @@ p
   > *:last-child
     border-bottom: 1px solid $bordersShadowColor
 
-.verticalActionsBar
+.verticalNavBar
   @include verticalCenter()
   padding: 5px
-  > .button
-    @include circle(21px)
-    @include shadow()
-    margin: 15px auto
-    &:hover
-      background-color: #F5F5F5
-      border-color: $secondaryColor
+
+.circleButton
+  @include circle(21px)
+  @include shadow()
+  margin: 15px auto
+  &:hover
+    background-color: #F5F5F5
+    border-color: $secondaryColor
   .active
     border-color: $secondaryColor
 
@@ -350,3 +359,44 @@ p
 
 .tertiaryButton
   @include buttonStyle($backgroundColor)
+
+#fileInputButtonHidden
+  display: none
+
+#lightBox
+  width: 100%
+  height: 100%
+  position: absolute
+  top: 0
+  left: 0
+  display: none
+  //z-index: 100
+  background-color: $backgroundColorTransparent
+
+.overAll
+  z-index: 200!important
+
+.redLink
+  color: $secondaryColor
+
+.popup
+  width: 350px
+  height: 250px
+  top: 20%
+  position: relative
+  padding: 10px
+  @include horizontalCenter()
+  @include shadow()
+  @include round(3px)
+  text-align: center
+  h1
+    text-transform: uppercase
+  p
+    margin: 10px
+  .regularButton
+    width: 80%
+    padding: 10px
+    font-size: 12px
+    margin-top: 5px
+    margin-bottom: 5px
+    @include horizontalCenter()
