@@ -196,8 +196,9 @@ p
   &:hover
     background-color: #F5F5F5
     border-color: $secondaryColor
-  .active
-    border-color: $secondaryColor
+
+.active
+  border-color: $secondaryColor
 
 .popover
   left: 120%
@@ -217,7 +218,7 @@ p
     border-top: none
     border-bottom: none
     border-right: none
-    box-shadow: -5px 0 10px -5px white
+    box-shadow: -5px 0 10px -5px $bordersShadowColor
     background-color: #EEE
   .auxPanel
     border-bottom: 1px solid $bordersShadowColor
@@ -369,15 +370,16 @@ p
   position: absolute
   top: 0
   left: 0
-  display: none
+  display: block
   //z-index: 100
   background-color: $backgroundColorTransparent
 
 .overAll
-  z-index: 200!important
+  z-index: 200
 
 .redLink
   color: $secondaryColor
+  font-weight: bold
 
 .popup
   width: 350px

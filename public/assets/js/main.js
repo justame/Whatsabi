@@ -35,11 +35,10 @@ $('*[class^="dotSession"]')
 
 //Popover trigger
 $('.popover').prev('.button').on('click', function () {
-    $(this).next('.popover').fadeToggle();
+    var $this = $(this);
+
+    $this.next('.popover').fadeToggle();
 });
-
-
-
 
 //Sliding panels
 $('*[id$="Trigger"]').on('click', function () {
@@ -60,13 +59,6 @@ $('#showKeywordsPanel').on('click', function () {
 });
 $('#showAuthorsComparePanel').on('click', function () {
     $('#authorsComparePanel').slideToggle();
-});
-
-//Showing authors details panel
-$('.authorPanel').on('click', function () {
-    var $this = $(this);
-
-    $this.siblings('.authorPanelDetails').slideToggle();
 });
 
 //Showing authors profiles

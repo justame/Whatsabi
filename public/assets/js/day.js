@@ -1,6 +1,6 @@
 function Day(date){
     this.date = date;
-    this.message = {
+    this.messages = {
         0: [],
         1: [],
         2: [],
@@ -31,10 +31,10 @@ function Day(date){
 Day.prototype.getTotalMessage = function () {
     var total = 0;
 
-    for(var hour in this.message){
+    for(var hour in this.messages){
         //Ensure the property exists
-        if(this.message.hasOwnProperty(hour)){
-            total += this.message[hour].length;
+        if(this.messages.hasOwnProperty(hour)){
+            total += this.messages[hour].length;
         }
     }
 
@@ -42,5 +42,11 @@ Day.prototype.getTotalMessage = function () {
 };
 
 Day.prototype.addMessage = function(message){
-    this.message[message.getDate().getHours()].push(message);
+    if(this.messages[message.getDate().getHours()] == undefined){
+        console.log(message.getDate())
+        console.log(message.getDate().getHours())
+        console.log(message.getContent())
+        console.log(message.getAuthor().getName())
+    }
+    this.messages[message.getDate().getHours()].push(message);
 };

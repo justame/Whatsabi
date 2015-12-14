@@ -57,7 +57,7 @@ function Conversation(eContainer){
 
             //Adding the message to the day container
             container.append('<li class="message whitePanel">' +
-                '<h4>' + message.getAuthor() + '</h4>' +
+                '<h4>' + message.getAuthor().getName() + '</h4>' +
                 '<div>' + message.getContent() + '</div>' +
                 '<span class="messageDateDetail">' + mDate.getHours() + ":" + mDate.getMinutes() + '</span></li>');
 
@@ -141,9 +141,6 @@ function Conversation(eContainer){
             //Counting one more element to follow the index in the array
             index++;
         }
-
-
-
 
         console.log("First Message " + firstMessageInContainer.getContent());
         console.log("Messages in screen " + $("#chatMessages").children().length);
