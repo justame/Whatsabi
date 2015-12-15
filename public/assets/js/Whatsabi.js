@@ -9,22 +9,87 @@ var Whatsabi = function () {
 
     function init(){
 
-        var //Init conversation variable with a new Conversation instance
+        var maxTimeBetweenSessions = 1000*60*60*2,
+            calendar = [],
+            //Init modules
             conversation = new Conversation('#chatMessages'),
             keywordAnalyzer  = new KeywordAnalyzer('#keywordsPanel'),
+            authorAnalyzer = new AuthorAnalyzer('#authorsList'),
             //Different regular expressions we will use later
             linePattern = "\\r\\n|\\r|\\n",
             authorPattern = "[-]\\s.[^:]*[:]\\s",//Match: "- Author name : "
-            datePattern1 = "\\d{1,2}\\s\\w{1,2}\\s\\w{3}",//Match: "12 de Abr"
+            datePattern1 = "\\d{1,2}(\\s\\w{1,2})?\\s[A-z|\u00E0-\u00FC]{3}(\\s[A-z|\u00E0-\u00FC])?",//Match: "12 de Abr"
             datePattern2 = "\\d{1,2}[\/]\\d{2}[\/]\\d{4}",//Match: "01/12/2014"
             hourPattern = "\\d{1,2}[:]\\d{2}\\s?[A-Z]{0,2}",//Match: "12:59PM"
             //Match: "26/10/2015, 10:34 AM" | "26/10/2015, 10:34" | "5 de Abr, 2:42AM" | "5 de Abr, 2:42"
-            dataHourPattern = "((" + datePattern1 + ")|(" + datePattern2 + "))[,]\\s" + hourPattern,
+            dataHourPattern = "((" + datePattern1 + ")|(" + datePattern2 + "))[,]?\\s" + hourPattern,
             //Match: "26/10/2015, 10:34 AM " | "26/10/2015, 10:34 " | "5 de Abr, 2:42AM " | "5 de Abr, 2:42 "
             messageDataPattern = "^" + dataHourPattern + "\\s",
             //Match: "26/10/2015, 10:34 AM - Author name : " | "26/10/2015, 10:34 - Author name : " |
             // "5 de Abr, 2:42AM - Author name : " | "5 de Abr, 2:42 - Author name : "
             messagePattern = messageDataPattern + authorPattern;
+
+        /**
+         * This method resets the data of the current conversation.
+         */
+        function reset(){
+            calendar = [];
+            conversation = new Conversation('#chatMessages');
+            keywordAnalyzer  = new KeywordAnalyzer('#keywordsPanel');
+            authorAnalyzer = new AuthorAnalyzer('#authorsList');
+        }
+
+        /**
+         * This method adds message to the calendar deposit.
+         * @param message
+         */
+        function addMessageToCalendar(message){
+            if(message instanceof  Message){
+                var firstDay = calendar[0],
+                    messageDate = new Date(message.getDate()),
+                    daysFromFirst;
+
+                //Set to 00:00:00
+                messageDate.setHours(0);
+                messageDate.setMinutes(0);
+                messageDate.setSeconds(0);
+                messageDate.setMilliseconds(0);
+
+                //Check if the first day exists and maintain the message queue
+                if(!firstDay){
+                    firstDay = new Day(messageDate);
+                }
+
+                //Check number of days form first day to the day of the message
+                daysFromFirst = Math.floor((messageDate - firstDay.date)/(1000*60*60*24));
+
+                //Manage message send before first day in calendar
+                if(daysFromFirst < 0){
+                    for(var i = calendar.length - 1; i >= 0; i--) {
+                        //Move the day to the correct index
+                        calendar[i - daysFromFirst] = calendar[i];
+
+                        //Set the current place as undefined
+                        calendar[i] = undefined;
+                    }
+
+                    //Set new value to daysFromFirst
+                    daysFromFirst = 0;
+                }
+
+                //Checking if the day exist
+                if(!calendar[daysFromFirst]){
+                    calendar[daysFromFirst] = new Day(messageDate);
+                }
+
+                //Finally we add the message to the calendar...
+                calendar[daysFromFirst].addMessage(message);
+            }else{
+                //If we arrive here, something is wrong!
+                console.log("Something wrong adding message to calendar. Message:");
+                console.log(message);
+            }
+        }
 
         /**
          * This method take a text and search for Whatsapp message patterns, then it returns an array of strings.
@@ -151,17 +216,18 @@ var Whatsabi = function () {
                 aux = messageData.split(" - ");
 
                 date = formatDate(aux[0]);
-                author = aux[1].slice(0,-2);
+                author = aux[1].slice(0, -2);
+                author = authorAnalyzer.addAuthor(author);
 
                 //Before add the formatted text to the array, we confirm everything is ok
                 //and log the data in he console if something was wrong
-                if(date instanceof Date && author.length > 0 && typeof content == "string"){
+                if(date instanceof Date && !isNaN(date.getDate()) && author instanceof Author && typeof content == "string"){
                     //Create the a message object with the data and push it to the messages array
                     var message = new Message(date, author, content);
 
                     messages.push(message);
                 }else{
-                    console.log("Something was wrong formatting the message:");
+                    console.log("%c Something was wrong formatting the message:", 'color: #FF0000');
                     console.log(line);
                     console.log("Date: " + date);
                     console.log("Author: " + author);
@@ -185,13 +251,68 @@ var Whatsabi = function () {
                 for(var i = 0; i < data.length; i++){
                     var currentMessage = data[i];
 
-                    conversation.addMessage(currentMessage);
-                    keywordAnalyzer.addText(currentMessage.getContent())
+                    addMessageToCalendar(currentMessage);
+                    //conversation.addMessage(currentMessage);
+                    //keywordAnalyzer.addText(currentMessage.getContent());
                 }
             }
 
-            keywordAnalyzer.print();
-            conversation.print();
+            //keywordAnalyzer.print();
+            //conversation.print();
+            //authorsAnalyzer.print();
+        }
+
+        /**
+         * This method set the data of the modules to get them working
+         */
+        function setDataInModules() {
+            //This variable
+            var currentSession = 0;
+
+            //Iterate days in calendar
+            for(var i = 0; i < calendar.length; i++){
+                var day = calendar[i];
+
+                //Day may not exist in calendar!!
+                if(day){
+                    //Iterate hours in day
+                    for(var j = 0; j < 24; j++) {
+                        var messagesInHour = day.messages[j],
+                            lastMessage;
+
+                        //Iterate messages in hour
+                        for (var k = 0; k < messagesInHour.length; k++) {
+                            var message = messagesInHour[k];
+
+                            //Creating a link between messages
+                            if (lastMessage) {
+                                message.setPrevious(lastMessage);
+                                lastMessage.setNext(message);
+                            }
+
+                            //Setting sessions in message
+                            if(message.getTimeToPrevious() > maxTimeBetweenSessions){
+                                message.setStartedSession(true);
+                                currentSession ++;
+                            }
+                            message.setInSession(currentSession);
+
+                            //Adding edges to the authors graph
+                            //We will take the last message and create a edges from this author to the
+                            //author of the current message
+                            if(lastMessage){
+                                authorAnalyzer.addInteractionBetween(lastMessage.getAuthor().getName(), message.getAuthor().getName());
+                            }
+
+                            //Send text to keywordAnalyzer
+                            keywordAnalyzer.addText(message.getContent());
+
+                            //Set message as lastMessage for later usage
+                            lastMessage = message;
+                        }
+                    }
+                }
+            }
         }
 
         //Return the instance of Whatsabi
@@ -205,8 +326,11 @@ var Whatsabi = function () {
                 var file = event.target.files[0],
                     reader = new FileReader();
 
+                //Reset
+                reset();
+
                 //Check extension
-                if (file.type == 'text/plain') {
+                if (file && file.type == 'text/plain') {
 
                     reader.readAsText(file);
 
@@ -251,6 +375,16 @@ var Whatsabi = function () {
              */
             filterReport: function () {
                 console.log("Filtering report");
+            },
+
+            /**
+             * This method set the time to consider sessionns.
+             * @param time
+             */
+            setMaxTimeBetweenSessions: function (time) {
+                if(typeof time == "Number"){
+                    maxTimeBetweenSessions = time;
+                }
             }
         }
     }
