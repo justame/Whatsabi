@@ -217,7 +217,7 @@ var Whatsabi = function () {
 
                 date = formatDate(aux[0]);
                 author = aux[1].slice(0, -2);
-                author = authorAnalyzer.addAuthor(author);
+                author = authorsAnalyzer.addAuthor(author);
 
                 //Before add the formatted text to the array, we confirm everything is ok
                 //and log the data in he console if something was wrong
@@ -339,6 +339,7 @@ var Whatsabi = function () {
                         var text = reader.result;
 
                         analyzeText(text);
+                        setDataInModules();
                     };
 
                     reader.onerror = function (e) {

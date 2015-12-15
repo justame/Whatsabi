@@ -1,38 +1,38 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Whatsabi</title>
 
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-    <div id="lightBox">
+    <div id="lightBox" style="display: block;">
         <div class="whitePanel popup">
-                <h1>
-                    Whatsabi
-                </h1>
-                <p>
-                    Let's get some cool metrics from your Whatsapp conversation. Whatsabi lets you know more about your Whatsapp usage.
-                </p>
-                <p>
-                    Project inspired by <a class="redLink" href="http://feltron.com/" target="_blank">Nicholas Felton's work</a>.
-                </p>
-                <div>
-                    <button id="showEmailButton" class="button regularButton">Send me an email</button>
-                    <input id="fileInputButtonHidden" type="file" name="file" value="Give me a file">
-                    <button id="fileInputButton" class="button regularButton">Give me a file</button>
-                </div>
-                <span id="progressMessage"></span>
-                <svg id="progressBar"></svg>
+            <h1>
+                Whatsabi
+            </h1>
+            <p>
+                Let's get some cool metrics from your Whatsapp conversation. Whatsabi lets you know more about your Whatsapp usage.
+            </p>
+            <p>
+                Project inspired by <a class="redLink" href="http://feltron.com/" target="_blank">Nicholas Felton's work</a>.
+            </p>
+            <div>
+                <button id="showEmailButton" class="button regularButton">Send me an email</button>
+                <input id="fileInputButtonHidden" type="file" name="file" value="Give me a file">
+                <button id="fileInputButton" class="button regularButton">Give me a file</button>
+            </div>
+            <span id="progressMessage"></span>
+            <svg id="progressBar"></svg>
         </div>
     </div>
 
     <nav>
         <ul class="verticalNavBar">
-            <li id="showNewConversationPopup" class="whitePanel button circleButton">
+            <li id="showNewConversationPopup" class="whitePanel button circleButton overAll">
                 <svg class="icon"></svg>
             </li>
             <li class="whitePanel button circleButton">
@@ -80,38 +80,37 @@
     <div id="rightSlide" class="verticalPanel">
         <nav>
             <ul class="verticalNavBar">
-                <li id="authorsPanelTrigger" class="whitePanel button circleButton">
+                <li id="authorsPanelTrigger" class="whitePanel button circleButton active">
 
                 </li>
-                <li id="chatPanelTrigger" class="whitePanel button circleButton">
+                <li id="chatPanelTrigger" class="whitePanel button circleButton active">
 
                 </li>
             </ul>
         </nav>
-        <div id="chatPanel" class="verticalPanel whitePanel">
-            <header>
+        <div id="chatPanel" class="verticalPanel whitePanel" style="display: block;">
+            <header style="display: block;">
                 <h2>Chat</h2>
                 <p>1259 messages.</p>
                 <button id="showKeywordsPanel" class="button regularButton secondaryButton">Keywords</button>
             </header>
-            <div id="keywordsPanel" class="auxPanel">
-                <!--Space for keywords-->
+            <div id="keywordsPanel" class="auxPanel" style="display: none;">
+
             </div>
-            <ul id="chatMessages" class="mainList">
-                <!--Space for messages-->
+            <ul id="chatMessages" class="mainList" style="display: block;">
             </ul>
         </div>
-        <div id="authorsPanel" class="verticalPanel whitePanel">
-            <header>
+        <div id="authorsPanel" class="verticalPanel whitePanel" style="display: block;">
+            <header style="display: block;">
                 <h2>Authors</h2>
                 <p>5 authors.</p>
-                <button  id="showAuthorsComparePanel" class="button regularButton">Compare</button>
+                <button id="showAuthorsComparePanel" class="button regularButton">Compare</button>
             </header>
-            <div id="authorsComparePanel" class="auxPanel">
-                <!--Space for comparing authors chart-->
+            <div id="authorsComparePanel" class="auxPanel" style="display: none;">
+
             </div>
-            <ul class="mainList">
-                <!--Space for authors-->
+            <ul class="mainList" style="display: block;">
+
             </ul>
         </div>
     </div>

@@ -98,18 +98,6 @@ function Message(time, name, text){
     };
 
     /**
-     * This method returns the time in the day when the message was created as a string
-     * with hh:mm format.
-     */
-    this.getTimeString = function () {
-        var string;
-
-        string += date.getHours() + ':' + date.getMinutes();
-
-        return string;
-    };
-
-    /**
      * This method returns the author of the conversation.
      * @returns {*}
      */
@@ -129,8 +117,20 @@ function Message(time, name, text){
      * This method returns the time (in milliseconds) to the next message in the conversation.
      * @returns {number}
      */
+    this.getTimeToPrevious = function () {
+        if(previous){
+            return Math.abs(previous.getDate().getTime() - date.getTime());
+        }
+    };
+
+    /**
+     * This method returns the time (in milliseconds) to the next message in the conversation.
+     * @returns {number}
+     */
     this.getTimeToNext = function () {
-        return next.getDate().getTime() - date.getTime();
+        if(next){
+            return next.getDate().getTime() - date.getTime();
+        }
     };
 
     /**
@@ -154,7 +154,9 @@ function Message(time, name, text){
      * @returns {boolean}
      */
     this.getEndedSession = function () {
-        //If the next message started a session, this one ended another one.
-        return next.getStartedSession();
+        //If there isn't next message or it started a session, this one ended another a session
+        if(!next ||next.getStartedSession()){
+            return true;
+        }
     };
 }
