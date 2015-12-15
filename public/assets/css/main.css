@@ -187,8 +187,9 @@ p {
   .circleButton:hover {
     background-color: #F5F5F5;
     border-color: #FF4242; }
-  .circleButton .active {
-    border-color: #FF4242; }
+
+.active {
+  border-color: #FF4242; }
 
 .popover {
   left: 120%;
@@ -213,7 +214,7 @@ p {
   border-top: none;
   border-bottom: none;
   border-right: none;
-  box-shadow: -5px 0 10px -5px white;
+  box-shadow: -5px 0 10px -5px #DDD;
   background-color: #EEE; }
 #rightSlide .auxPanel {
   border-bottom: 1px solid #DDD; }
@@ -378,14 +379,15 @@ p {
   position: absolute;
   top: 0;
   left: 0;
-  display: none;
+  display: block;
   background-color: rgba(240, 242, 235, 0.95); }
 
 .overAll {
-  z-index: 200 !important; }
+  z-index: 200; }
 
 .redLink {
-  color: #FF4242; }
+  color: #FF4242;
+  font-weight: bold; }
 
 .popup {
   width: 350px;
