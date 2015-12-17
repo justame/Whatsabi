@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div id="lightBox" style="display: block;">
+    <div id="lightBox">
         <div class="whitePanel popup">
             <h1>
                 Whatsabi
@@ -22,7 +22,7 @@
             </p>
             <div>
                 <button id="showEmailButton" class="button regularButton">Send me an email</button>
-                <input id="fileInputButtonHidden" type="file" name="file" value="Give me a file">
+                <input id="fileInputButtonHidden" type="file" name="file">
                 <button id="fileInputButton" class="button regularButton">Give me a file</button>
             </div>
             <span id="progressMessage"></span>
@@ -88,28 +88,28 @@
                 </li>
             </ul>
         </nav>
-        <div id="chatPanel" class="verticalPanel whitePanel" style="display: block;">
-            <header style="display: block;">
+        <div id="chatPanel" class="verticalPanel whitePanel">
+            <header>
                 <h2>Chat</h2>
                 <p>1259 messages.</p>
                 <button id="showKeywordsPanel" class="button regularButton secondaryButton">Keywords</button>
             </header>
-            <div id="keywordsPanel" class="auxPanel" style="display: none;">
+            <div id="keywordsPanel" class="auxPanel">
 
             </div>
-            <ul id="chatMessages" class="mainList" style="display: block;">
+            <ul id="chatMessages" class="mainList">
             </ul>
         </div>
-        <div id="authorsPanel" class="verticalPanel whitePanel" style="display: block;">
-            <header style="display: block;">
+        <div id="authorsPanel" class="verticalPanel whitePanel">
+            <header>
                 <h2>Authors</h2>
                 <p>5 authors.</p>
                 <button id="showAuthorsComparePanel" class="button regularButton">Compare</button>
             </header>
-            <div id="authorsComparePanel" class="auxPanel" style="display: none;">
+            <div id="authorsComparePanel" class="auxPanel">
 
             </div>
-            <ul class="mainList" style="display: block;">
+            <ul id="authorsList" class="mainList">
 
             </ul>
         </div>
@@ -122,6 +122,7 @@
     <script type="text/javascript" src="assets/js/main.js"></script>
     <script type="text/javascript" src="assets/js/day.js"></script>
     <script type="text/javascript" src="assets/js/message.js"></script>
+    <script type="text/javascript" src="assets/js/author.js"></script>
     <script type="text/javascript" src="assets/js/conversation.js"></script>
     <script type="text/javascript" src="assets/js/keywordAnalyzer.js"></script>
     <script type="text/javascript" src="assets/js/authorAnalyzer.js"></script>

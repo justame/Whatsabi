@@ -217,7 +217,7 @@ var Whatsabi = function () {
 
                 date = formatDate(aux[0]);
                 author = aux[1].slice(0, -2);
-                author = authorsAnalyzer.addAuthor(author);
+                author = authorAnalyzer.addAuthor(author);
 
                 //Before add the formatted text to the array, we confirm everything is ok
                 //and log the data in he console if something was wrong
@@ -252,14 +252,14 @@ var Whatsabi = function () {
                     var currentMessage = data[i];
 
                     addMessageToCalendar(currentMessage);
-                    //conversation.addMessage(currentMessage);
-                    //keywordAnalyzer.addText(currentMessage.getContent());
+                    conversation.addMessage(currentMessage);
+                    keywordAnalyzer.addText(currentMessage.getContent());
                 }
             }
 
-            //keywordAnalyzer.print();
-            //conversation.print();
-            //authorsAnalyzer.print();
+            keywordAnalyzer.print();
+            conversation.print();
+            authorAnalyzer.print();
         }
 
         /**
