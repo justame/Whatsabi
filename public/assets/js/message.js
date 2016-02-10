@@ -146,7 +146,7 @@ function Message(time, name, text){
      * @returns {boolean}
      */
     this.getStartedSession = function () {
-        return startSession;
+        return startedSession;
     };
 
     /**

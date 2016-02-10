@@ -50,3 +50,7 @@ Day.prototype.addMessage = function(message){
     }
     this.messages[message.getDate().getHours()].push(message);
 };
+
+Day.prototype.getTotalMessageInHour = function (hour) {
+    return this.messages[hour].length;
+};

@@ -2,6 +2,97 @@ function AuthorAnalyzer(eContainer){
     var deposit = new Graph(),
         container = $(eContainer);
 
+    function getInteractionsWithHerOwn(name){
+        var index = getAuthorIndex(name);
+
+        return deposit.getAdjMatrix()[index][index];
+    }
+
+    function getMainFollowing(name){
+        var authorIndex = getAuthorIndex(name),
+            interactions = deposit.getAdjMatrix()[authorIndex],
+            authors = deposit.getVertexes(),
+            max, maxIndex;
+
+        for(var i = 0; i < interactions.length; i++){
+            var current = interactions[i];
+
+            //Ignore interactions with herself
+            if( i != authorIndex){
+                //If max is null, set current as max
+                if(!max){
+                    max = current;
+                    maxIndex = i;
+
+                    //Check if current is greater than max
+                }else if(max && current > max){
+                    max = current;
+
+                    maxIndex = i;
+                }
+            }
+        }
+
+        return authors[maxIndex];
+    }
+
+    function getLessFollowing(name){
+        var authorIndex = getAuthorIndex(name),
+            interactions = deposit.getAdjMatrix()[authorIndex],
+            authors = deposit.getVertexes(),
+            min = 0,
+            minIndex = 0;
+
+        for(var i = 0; i < interactions.length; i++){
+            var current = interactions[i];
+
+            //Ignore interactions with herself
+            if( i != authorIndex){
+                //If max is null, set current as max
+                if(!min){
+                    min = current;
+                    minIndex = i;
+
+                //Check if current is greater than max
+                }else if(current < min){
+                    min = current;
+
+                    minIndex = i;
+                }
+            }
+        }
+
+        return authors[minIndex];
+    }
+
+    function getMainFollower(name){
+        var authorIndex = getAuthorIndex(name),
+            adjMatrix = deposit.getAdjMatrix(),
+            authors = deposit.getVertexes(),
+            max, maxIndex;
+
+        for(var i = 0; i < adjMatrix.length; i++){
+            var current = adjMatrix[i][authorIndex];
+
+            //Ignore interactions with herself
+            if( i != authorIndex){
+                //If max is null, set current as max
+                if(!max){
+                    max = current;
+                    maxIndex = i;
+
+                //Check if current is greater than max
+                }else if(max && current > max){
+                    max = current;
+
+                    maxIndex = i;
+                }
+            }
+        }
+
+        return authors[maxIndex];
+    }
+
     /**
      * This method add a new Author object as a vertex in the deposit.
      * @param name
@@ -26,24 +117,24 @@ function AuthorAnalyzer(eContainer){
             '<h3>' + authorName + '</h3>' +
             '<p>' + author.getTotalMessage() + ' messages. ' +
             author.getTotalMedia() + ' files. ' +
-            /*author.getTimeSpent()*/0 + 'h spent.</p>' +
+            Math.round(author.getTimeSpent()/1000/60/60) + 'h spent.</p>' +
             '</div>' +
             '<div class="authorPanelDetails">' +
-            '<p>Iniciadas: 5</p>' +
-            '<p>Finalizadas: 2</p>' +
-            '<p>Monologos: 10</p>' +
-            '<p>Poca interacción con Author3</p>' +
-            '<p>Main followers:</p>' +
+            '<p>Iniciadas: ' + author.getStartedSessions() + '</p>' +
+            '<p>Finalizadas: ' + author.getEndedSessions() + '</p>' +
+            '<p>Monologos: ' + getInteractionsWithHerOwn(authorName) + '</p>' +
+            '<p>Poca interacción con ' + getLessFollowing(authorName).getName() + '</p>' +
+            '<p>Main followers: </p>' +
             '<ul>' +
-            '<li>Authro1</li>' +
+            '<li>' + getMainFollower(authorName).getName() + '</li>' +
             '</ul>' +
             '<p>Main following:</p>' +
             '<ul>' +
-            '<li>Authro1</li>' +
+            '<li>' + getMainFollowing(authorName).getName() + '</li>' +
             '</ul>' +
             '<p>Keyword:</p>' +
             '<ul>' +
-            '<li>Keywrod1</li>' +
+            '<li>' + author.getMostUsedWord() + '</li>' +
             '</ul>' +
             '</div>' +
             '</li>'
@@ -96,7 +187,7 @@ function AuthorAnalyzer(eContainer){
             var adjMatrix = deposit.getAdjMatrix();
 
             //Add one to the existing edge
-            adjMatrix[fromVertex][toVertex] = 1;
+            adjMatrix[fromVertex][toVertex]++;
         }
     };
 

@@ -239,6 +239,51 @@ var Whatsabi = function () {
         }
 
         /**
+         * This method serialize the data so chart can use it
+         */
+        function getSerializedCalendar(){
+            var serialized = new Series(),
+                data = [];
+
+            for (var i = 0; i < calendar.length; i++) {
+                var day = calendar[i];
+
+                //Preventing days without data
+                if(day){
+                    for (var j = 0; j < 24; j++) {
+                        data.push(day.getTotalMessageInHour(j))
+                    }
+                }
+            }
+
+            serialized.data = data;
+
+            return serialized;
+        }
+
+        /**
+         * This method print the reports
+         */
+        function printReport(){
+            var charts = [],
+                mainChart = new DotPolyChart('mainChart'),
+                series = [getSerializedCalendar()];
+
+            //Adding the charts to the charts array
+            charts.push(mainChart);
+
+            //Set data in charts
+            mainChart.setData(series);
+
+            //Paint all the charts
+            for (var i = 0; i < charts.length; i++) {
+                var chart = charts[i];
+
+                chart.paint();
+            }
+        }
+
+        /**
          * Method to analyze a new text.
          */
         function analyzeText(text){
@@ -252,14 +297,8 @@ var Whatsabi = function () {
                     var currentMessage = data[i];
 
                     addMessageToCalendar(currentMessage);
-                    conversation.addMessage(currentMessage);
-                    keywordAnalyzer.addText(currentMessage.getContent());
                 }
             }
-
-            keywordAnalyzer.print();
-            conversation.print();
-            authorAnalyzer.print();
         }
 
         /**
@@ -271,14 +310,14 @@ var Whatsabi = function () {
 
             //Iterate days in calendar
             for(var i = 0; i < calendar.length; i++){
-                var day = calendar[i];
+                var day = calendar[i],
+                    lastMessage;
 
                 //Day may not exist in calendar!!
                 if(day){
                     //Iterate hours in day
                     for(var j = 0; j < 24; j++) {
-                        var messagesInHour = day.messages[j],
-                            lastMessage;
+                        var messagesInHour = day.messages[j];
 
                         //Iterate messages in hour
                         for (var k = 0; k < messagesInHour.length; k++) {
@@ -297,6 +336,9 @@ var Whatsabi = function () {
                             }
                             message.setInSession(currentSession);
 
+                            //Adding message to author
+                            message.getAuthor().addMessage(message);
+
                             //Adding edges to the authors graph
                             //We will take the last message and create a edges from this author to the
                             //author of the current message
@@ -306,6 +348,9 @@ var Whatsabi = function () {
 
                             //Send text to keywordAnalyzer
                             keywordAnalyzer.addText(message.getContent());
+
+                            //Add message to conversation
+                            conversation.addMessage(message);
 
                             //Set message as lastMessage for later usage
                             lastMessage = message;
@@ -340,6 +385,11 @@ var Whatsabi = function () {
 
                         analyzeText(text);
                         setDataInModules();
+
+                        keywordAnalyzer.print();
+                        conversation.print();
+                        authorAnalyzer.print();
+                        printReport();
                     };
 
                     reader.onerror = function (e) {
@@ -399,7 +449,6 @@ var Whatsabi = function () {
         }
     }
 }();
-
 
 var app = Whatsabi.getInstance();
 $('#fileInputButtonHidden').on('change', app.readFile);

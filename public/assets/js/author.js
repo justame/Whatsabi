@@ -3,22 +3,25 @@ function Author(authorName) {
         timeSpent = 0,
         timeOut = 0,
         messages = [],
-        media = [];
+        media = [],
+        regExp = /[^\w]/,
+        keywords = new KeywordTree();
 
     /**
-     * This method counts one more message sent by the user.
+     * This method add one more message sent by the user.
      * @param message
      */
     this.addMessage = function(message){
+        //Add a pointer to the message
         messages.push(message);
-    };
 
-    /**
-     * This method counts one more media shared by the user.
-     * @param message
-     */
-    this.addMedia = function(message){
-        media.push(message);
+        //Add text to the keyword analyzer
+        keywords.addWordList(message.getContent().split(regExp));
+
+        //Identify messages of media files shared
+        if(/.?[<].*[>]/.test(message.getContent())){
+            media.push(message);
+        }
     };
 
     /**
@@ -47,7 +50,6 @@ function Author(authorName) {
                 //Time between two messages...
                 partialTime = message.getDate() - previousMessage.getDate();
 
-                //TODO: Prevent bad order in author.message to get correct timing
                 if(partialTime > (1000*60*15)){
                     timeOut += partialTime;
                 }
@@ -55,10 +57,40 @@ function Author(authorName) {
 
             timeSpent = totalChatTime - timeOut;
         }
-        console.log("TimeTotal: "+ totalChatTime);
-        console.log("TimeSpent: "+ timeSpent);
 
         return timeSpent;
+    };
+
+    this.getStartedSessions = function() {
+        var startedSessions = 0;
+
+        for(var i = 0; i < messages.length; i++){
+            if(messages[i].getStartedSession()){
+                startedSessions++;
+            }
+        }
+
+        return startedSessions;
+    };
+
+    this.getEndedSessions = function() {
+        var endedSessions = 0;
+
+        for(var i = 0; i < messages.length; i++){
+            if(messages[i].getEndedSession()){
+                endedSessions++;
+            }
+        }
+
+        return endedSessions;
+    };
+
+    this.getKeywords = function () {
+        return keywords.getAllOccurrences();
+    };
+
+    this.getMostUsedWord = function () {
+        return this.getKeywords()[0].getWord();
     };
 
     /**
