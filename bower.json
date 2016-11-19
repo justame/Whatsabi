@@ -1,0 +1,16 @@
+{
+  "name": "Whatsabi",
+  "description": "Fresh Whatsapp analyzer",
+  "main": "server.js",
+  "authors": [
+    "@wikimescudi"
+  ],
+  "homepage": "https://github.com/juanjovazpar/Whatsabi",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
