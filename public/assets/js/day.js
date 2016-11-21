@@ -42,12 +42,6 @@ Day.prototype.getTotalMessage = function () {
 };
 
 Day.prototype.addMessage = function(message){
-    if(this.messages[message.getDate().getHours()] == undefined){
-        console.log(message.getDate())
-        console.log(message.getDate().getHours())
-        console.log(message.getContent())
-        console.log(message.getAuthor().getName())
-    }
     this.messages[message.getDate().getHours()].push(message);
 };
 

@@ -1,111 +1,103 @@
-function Author(authorName) {
-    var name = authorName || 'Mr. Nobody',
-        timeSpent = 0,
-        timeOut = 0,
-        messages = [],
-        media = [],
-        regExp = /[^\w]/,
-        keywords = new KeywordTree();
+function Author(name) {
+  this.name = name;
+  var name = name;
+  var messages = [];
+  var media = [];
+  var messagesSplitter = new RegExp('[^\w]');
+  var mediaMatch = new RegExp('.?[<].*[>]');
+  var keywords = new KeywordTree();
+  var timeSpent;
+  var timeOut;
+  var maxTimeBetweenMessages = 1000 * 60 * 15;//We will consider 15min as the max time between messages to consider a session
 
-    /**
-     * This method add one more message sent by the user.
-     * @param message
-     */
-    this.addMessage = function(message){
-        //Add a pointer to the message
-        messages.push(message);
+  /**
+   * This method add one more message sent by the user.
+   * @param message
+   */
+  this.addMessage = function(message){
+    var messageContent = message.getContent();
 
-        //Add text to the keyword analyzer
-        keywords.addWordList(message.getContent().split(regExp));
+    messages.push(message);
+    keywords.addWordList(messageContent.split(messagesSplitter));
 
-        //Identify messages of media files shared
-        if(/.?[<].*[>]/.test(message.getContent())){
-            media.push(message);
-        }
-    };
+    if(mediaMatch.test(messageContent)){
+      media.push(message);
+    }
+  };
 
-    /**
-     * This method returns the name of the author.
-     * @returns {string}
-     */
-    this.getName = function () {
-        return name;
-    };
+  /**
+   * This method returns the name of the author.
+   * @returns {string}
+   */
+  this.getName = function () {
+    return name;
+  };
 
-    /**
-     * This method returns the time spent by the user in the conversation.
-     * @returns {number}
-     */
-    this.getTimeSpent = function () {
-        if(!timeSpent){
-            var totalChatTime = messages[messages.length-1].getDate() - messages[0].getDate(),
-                partialTime;
+  /**
+   * This method returns the time spent by the user in the conversation.
+   * We will consider time spent as the different between the time from the
+   * first to the last message with a the time out (more than 15 minutes will be timeout)
+   * @returns {number}
+   */
+  this.getTimeSpent = function () {
+    if(!timeSpent){
+      for(var i = 0; i < messages.length; i++){
+        var current = messages[i];
+        var prev = i > 0 ? messages[i - 1] : current;
+        var dif = current.getDate() - prev.getDate();
 
-            //We will consider the time spent as the different between the time from the
-            //first to the last message with the time out (more than 15 minutes will be timeout)
-            for(var i = 1;i < messages.length;i++){
-                var message = messages[i],
-                    previousMessage = messages[i-1];
+        timeSpent += dif < maxTimeBetweenMessages ? dif : 0;
+      }
+    }
 
-                //Time between two messages...
-                partialTime = message.getDate() - previousMessage.getDate();
+    return timeSpent;
+  };
 
-                if(partialTime > (1000*60*15)){
-                    timeOut += partialTime;
-                }
-            }
+  this.getStartedSessions = function() {
+    var startedSessions = 0;
 
-            timeSpent = totalChatTime - timeOut;
-        }
+    for(var i = 0; i < messages.length; i++){
+      if(messages[i].getStartedSession()){
+        startedSessions++;
+      }
+    }
 
-        return timeSpent;
-    };
+    return startedSessions;
+  };
 
-    this.getStartedSessions = function() {
-        var startedSessions = 0;
+  this.getEndedSessions = function() {
+    var endedSessions = 0;
 
-        for(var i = 0; i < messages.length; i++){
-            if(messages[i].getStartedSession()){
-                startedSessions++;
-            }
-        }
+    for(var i = 0; i < messages.length; i++){
+      if(messages[i].getEndedSession()){
+        endedSessions++;
+      }
+    }
 
-        return startedSessions;
-    };
+    return endedSessions;
+  };
 
-    this.getEndedSessions = function() {
-        var endedSessions = 0;
+  this.getKeywords = function () {
+    return keywords.getAllOccurrences();
+  };
 
-        for(var i = 0; i < messages.length; i++){
-            if(messages[i].getEndedSession()){
-                endedSessions++;
-            }
-        }
+  this.getMostUsedWord = function () {
+    return this.getKeywords()[0].getWord();
+  };
 
-        return endedSessions;
-    };
+  /**
+   * This method returns the total number of message sent by the user.
+   * @returns {Number}
+   */
+  this.getTotalMessage = function () {
+    return messages.length;
+  };
 
-    this.getKeywords = function () {
-        return keywords.getAllOccurrences();
-    };
-
-    this.getMostUsedWord = function () {
-        return this.getKeywords()[0].getWord();
-    };
-
-    /**
-     * This method returns the total number of message sent by the user.
-     * @returns {Number}
-     */
-    this.getTotalMessage = function () {
-        return messages.length;
-    };
-
-    /**
-     * This method returns the total number of media shared by the user.
-     * @returns {Number}
-     */
-    this.getTotalMedia = function () {
-        return media.length;
-    };
+  /**
+   * This method returns the total number of media shared by the user.
+   * @returns {Number}
+   */
+  this.getTotalMedia = function () {
+    return media.length;
+  };
 }

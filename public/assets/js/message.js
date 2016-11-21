@@ -1,20 +1,24 @@
 /**
  * Message class models each message in the conversation. This class includes a
  * pointer to the next message so it can work as a node in a queue.
- * @param time
+ * @param date
  * @param name
  * @param text
  * @constructor
  */
-function Message(time, name, text){
-    var date = (time instanceof Date) ? time : new Date(),
-        author = name,
-        content = text,
-        startedSession = false,
-        previous = null,
-        next = null,
-        inSession;
+function Message(date, user, content){
+    var date = date;
+    var user = user;
+    var content = content;
+    var startedSession = false;
+    var previous = null;
+    var next = null;
+    var inSession;
 
+    this.date = date;
+    this.user = user;
+    this.content = content;
+    
     /**
      * This method set the pointer to the previous message.
      * @param message
@@ -98,11 +102,11 @@ function Message(time, name, text){
     };
 
     /**
-     * This method returns the author of the conversation.
+     * This method returns the user of the conversation.
      * @returns {*}
      */
     this.getAuthor = function () {
-        return author;
+        return user;
     };
 
     /**
@@ -114,7 +118,7 @@ function Message(time, name, text){
     };
 
     /**
-     * This method returns the time (in milliseconds) to the next message in the conversation.
+     * This method returns the date (in milliseconds) to the next message in the conversation.
      * @returns {number}
      */
     this.getTimeToPrevious = function () {
@@ -124,7 +128,7 @@ function Message(time, name, text){
     };
 
     /**
-     * This method returns the time (in milliseconds) to the next message in the conversation.
+     * This method returns the date (in milliseconds) to the next message in the conversation.
      * @returns {number}
      */
     this.getTimeToNext = function () {

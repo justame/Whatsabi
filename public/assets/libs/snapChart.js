@@ -375,11 +375,8 @@ DotPolyChart.prototype.setData = function (series) {
         while(counter < currentData.length){
             sum += currentData[counter-1];
 
-            console.log("Counter: "+counter);
-            console.log("Sum: "+sum);
             if(counter == currentData.length-1 || (counter > 0 && counter%period == 0)){
                 newData.push(sum);
-                console.log("Inside");
                 sum = 0;
             }
 
