@@ -4,6 +4,7 @@ var Whatsabi = function () {
   function init(){
 
     var maxTimeBetweenSessions = 1000*60*60*2;
+    var msDaily = 1000*60*60*24;
     var calendar = [];
     var users = [];
 
@@ -44,29 +45,22 @@ var Whatsabi = function () {
           firstDay = new Day(messageDate);
         }
 
-        //Check number of days form first day to the day of the message
-        daysFromFirst = Math.floor((messageDate - firstDay.date)/(1000*60*60*24));
+        daysFromFirst = Math.floor((messageDate - firstDay.date) / msDaily);
 
-        //Manage message send before first day in calendar
+        //In case the messages are not in order...
         if(daysFromFirst < 0){
           for(var i = calendar.length - 1; i >= 0; i--) {
-            //Move the day to the correct index
             calendar[i - daysFromFirst] = calendar[i];
-
-            //Set the current place as undefined
             calendar[i] = undefined;
           }
 
-          //Set new value to daysFromFirst
           daysFromFirst = 0;
         }
 
-        //Checking if the day exist
         if(!calendar[daysFromFirst]){
           calendar[daysFromFirst] = new Day(messageDate);
         }
 
-        //Finally we add the message to the calendar...
         calendar[daysFromFirst].addMessage(message);
       }
     }
@@ -86,10 +80,21 @@ var Whatsabi = function () {
         })
       };
 
+      //ALERT! Date() must follow MM/DD/YYYY formart: Spain DD/MM/YYYY
+      //For other countries this will throw an error
+      function parseDate(date){
+        var day = date.slice(0,3);
+        var month = date.slice(3,6);
+        var year = date.slice(6);
+
+        return month + day + year;
+      }
+
       return messages.map(function(m, i){
         var metadata = m.match(messageRegexp)[0];
         var content = m.split(metadata)[1];
-        var date = new Date(metadata.match(new RegExp(dateRegexp))[0]);
+        var date = new Date(parseDate(metadata.match(new RegExp(dateRegexp))[0]));
+
         var username = metadata.match(new RegExp(usernameRegexp))[0];
         username = username.substring(3, username.length - 1);
         var user;
@@ -168,43 +173,33 @@ var Whatsabi = function () {
      * This method set the data of the modules to get them working
      */
     function setDataInModules() {
-      //This variable
       var currentSession = 0;
 
-      //Iterate days in calendar
       for(var i = 0; i < calendar.length; i++){
-        var day = calendar[i],
-          lastMessage;
+        var day = calendar[i];
+        var lastMessage;
 
-        //Day may not exist in calendar!!
+        //The day could do not exist
         if(day){
-          //Iterate hours in day
           for(var j = 0; j < 24; j++) {
             var messagesInHour = day.messages[j];
 
-            //Iterate messages in hour
             for (var k = 0; k < messagesInHour.length; k++) {
               var message = messagesInHour[k];
 
-              //Creating a link between messages
               if (lastMessage) {
                 message.setPrevious(lastMessage);
                 lastMessage.setNext(message);
               }
 
-              //Setting sessions in message
               if(message.getTimeToPrevious() > maxTimeBetweenSessions){
                 message.setStartedSession(true);
                 currentSession ++;
               }
               message.setInSession(currentSession);
 
-              //Adding message to author
-              //message.getAuthor().addMessage(message);
+              message.getAuthor().addMessage(message);
 
-              //Adding edges to the authors graph
-              //We will take the last message and create a edges from this author to the
-              //author of the current message
               if(lastMessage){
                 usersAnalyzer.addInteractionBetween(lastMessage.getAuthor().getName(), message.getAuthor().getName());
               }
@@ -221,6 +216,7 @@ var Whatsabi = function () {
           }
         }
       }
+      console.log(conversation)
     }
 
     //Return the instance of Whatsabi
